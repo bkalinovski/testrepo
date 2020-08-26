@@ -30,7 +30,7 @@ jobs:
         echo 'Docker login'
         docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
         echo 'Running build...'
-        docker build -t bkalinovski/testrepo:latest .
+        docker build -t bkalinovski/testrepo:latest ./TestAppSolution
         echo 'Pusing image...'
         docker push bkalinovski/testrepo:latest
         echo 'Done!'
