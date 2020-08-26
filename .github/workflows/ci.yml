@@ -28,7 +28,7 @@ jobs:
       run: |
         ls -l
         echo 'Docker login'
-        docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+        docker login -u $DOCKER_LOGIN --password-stdin $DOCKER_PASSWORD
         echo 'Running build...'
         docker build -t bkalinovski/testrepo:latest .
         echo 'Pusing image...'
