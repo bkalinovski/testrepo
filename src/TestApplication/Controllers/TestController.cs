@@ -22,6 +22,7 @@ namespace TestApplication.Controllers
             return "Hello Bogdan";
         }
 
+        [HttpGet]
         public string Greeting(string name)
         {
             return $"Hello {name}";
