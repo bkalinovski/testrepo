@@ -19,7 +19,7 @@ namespace TestApplication.Controllers
         [HttpGet]
         public string Greeting()
         {
-            return "Hello World";
+            return "Hello Bogdan";
         }
     }
 }
