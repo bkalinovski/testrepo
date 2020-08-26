@@ -23,12 +23,6 @@ namespace TestApplication.Controllers
         }
 
         [HttpGet]
-        public string Greeting(string name)
-        {
-            return $"Hello {name}";
-        }
-
-        [HttpGet]
         public string Greeting2(string name)
         {
             return $"Hello {name}";
