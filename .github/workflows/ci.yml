@@ -37,5 +37,5 @@ jobs:
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
           username: ${{ secrets.DIGITAL_OCEAN_LOGIN }}
           password: ${{ secrets.DIGITAL_OCEAN_PASSWORD }}
-          script: bash scripts/updateTestRepo.sh
+          script: bash scripts/updateTestRepo.sh bkalinovski/testrepo:latest
     
