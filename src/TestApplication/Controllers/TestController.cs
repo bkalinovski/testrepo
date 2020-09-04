@@ -27,5 +27,11 @@ namespace TestApplication.Controllers
         {
             return $"Hello {name}";
         }
+
+        [HttpGet]
+        public string NewGreeting()
+        {
+            return "Hi, just testing my CI/CD";
+        }
     }
 }
