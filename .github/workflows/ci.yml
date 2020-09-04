@@ -31,12 +31,11 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
       - name: deploy on DigitalOcean droplet
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
           username: ${{ secrets.DIGITAL_OCEAN_LOGIN }}
           password: ${{ secrets.DIGITAL_OCEAN_PASSWORD }}
-          script: ls && bash scripts/updateTestRepo.sh
+          script: bash scripts/updateTestRepo.sh
     
