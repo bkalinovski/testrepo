@@ -23,8 +23,12 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Setup .NET
+      env: 
+        ISSUE_TITLE: ${{ github.event.issue.title }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        ISSUE_ASSIGNEE: ${{ github.event.issue.assignee.login }}
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "You were assigned to issue ${{ github.event.assignee.login }}"
+        message: "$ISSUE_ASSIGNEE was assigned to issue: $ISSUE_TITLE"
