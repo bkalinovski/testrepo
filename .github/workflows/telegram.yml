@@ -10,8 +10,13 @@ jobs:
      steps:
      - name: Show GitHub context   
        env: 
-        GITHUB_CONTEXT: ${{ toJson(github) }}   
-       run: echo "$GITHUB_CONTEXT"
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        ASSIGNEES: ${{ github.event.assignee.login }}
+       run: |
+        echo "$GITHUB_CONTEXT"
+        echo "Actor $GITHUB_ACTOR"
+        echo "Assignees $ASSIGNEES"
 
   sendmessage:
     runs-on: ubuntu-latest
@@ -22,4 +27,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "You were assigned to issue $GITHUB_ACTOR"
+        message: "You were assigned to issue ${{ github.event.assignee.login }}"
