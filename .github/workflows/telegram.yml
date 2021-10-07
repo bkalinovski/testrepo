@@ -5,6 +5,14 @@ on:
     types: [assigned]
 
 jobs:
+  consolelog:
+     runs-on: ubuntu-latest
+     steps:
+     - name: Show GitHub context   
+     env: 
+      GITHUB_CONTEXT: ${{ toJson(github) }}   
+      run: echo "$GITHUB_CONTEXT" ```
+
   sendmessage:
     runs-on: ubuntu-latest
     steps:
