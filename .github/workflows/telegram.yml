@@ -31,4 +31,7 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "${{ github.event.issue.assignee.login }} was assigned to issue: ${{ github.event.issue.title }}"
+        message: |
+          ${{ github.event.issue.assignee.login }} was assigned to issue: ${{ github.event.issue.title }}
+          Body:
+          ```${{ github.event.issue.body }}```
