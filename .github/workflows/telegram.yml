@@ -14,4 +14,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: You were assigned to issue $GITHUB_ACTOR
+        message: "You were assigned to issue $GITHUB_ACTOR"
