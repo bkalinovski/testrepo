@@ -1,0 +1,56 @@
+name: semver
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches: [ master ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
+
+jobs:
+  prepare:
+    name: Preparing build context
+    runs-on: ubuntu-latest
+    outputs:
+      SANITISED_REPOSITORY_NAME: ${{ steps.get_env.outputs.SANITISED_REPOSITORY_NAME }}
+      DOCKER_IMAGE: ${{ steps.get_env.outputs.DOCKER_IMAGE }}
+      GITHUB_COMMIT_NUMBER: ${{ steps.get_env.outputs.GITHUB_COMMIT_NUMBER }}
+      GITHUB_SHA: ${{ steps.get_env.outputs.GITHUB_SHA }}
+      GITHUB_RUN_ID: ${{ steps.get_env.outputs.GITHUB_RUN_ID }}
+      RELEASE_VERSION: ${{ steps.get_env.outputs.RELEASE_VERSION }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Setting environment variables
+        id: get_env
+        run: |
+          DOWNLOAD_URL=$(curl -s https://api.github.com/repos/lukaszraczylo/semver-generator/releases/latest \
+            | grep browser_download_url \
+            | grep semver-gen-linux-amd64 \
+            | cut -d '"' -f 4)
+          curl -s -L -o semver-gen "$DOWNLOAD_URL" && chmod +x semver-gen
+          TMP_SANITISED_REPOSITORY_NAME=$(echo ${{ github.event.repository.name }} | sed -e 's|\.|-|g')
+          TMP_GITHUB_COMMITS_COUNT=$(git rev-list --count HEAD)
+          TMP_GITHUB_COUNT_NUMBER=$(echo ${GITHUB_RUN_NUMBER})
+          TMP_RELEASE_VERSION=$(./semver-gen generate -l -c config-release.yaml | sed -e 's|SEMVER ||g')
+          echo "::set-output name=SANITISED_REPOSITORY_NAME::$TMP_SANITISED_REPOSITORY_NAME"
+          echo "::set-output name=DOCKER_IMAGE::ghcr.io/${{ github.repository_owner }}/$TMP_SANITISED_REPOSITORY_NAME"
+          echo "::set-output name=GITHUB_COMMIT_NUMBER::$TMP_GITHUB_COMMITS_COUNT"
+          echo "::set-output name=GITHUB_SHA::$(echo ${GITHUB_SHA::8})"
+          echo "::set-output name=GITHUB_RUN_ID::$TMP_GITHUB_COUNT_NUMBER"
+          echo "::set-output name=RELEASE_VERSION::$TMP_RELEASE_VERSION"
