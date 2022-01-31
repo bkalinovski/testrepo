@@ -6,14 +6,15 @@ force:
   commit: c0872a595f4054b22eb633c159978f49f16881c5
 wording:
   patch:
-    - update
-    - fix
+    - "update:"
+    - "fix:"
   minor:
-    - change
-    - feat
-    - improve
+    - "change:"
+    - "feat:"
+    - "improve:"
+    - "feature:"
   major:
-    - breaking
+    - "breaking:"
   release:
-    - release-candidate
-    - add-rc
+    - "release-candidate:"
+    - "add-rc:"
