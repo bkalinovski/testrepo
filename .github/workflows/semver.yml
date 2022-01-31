@@ -40,6 +40,7 @@ jobs:
           config_file: semver.yaml
           repository_local: true
           repository_url: https://github.com/bkalinovski/testrepo
+          strict: true
           github_username: bkalinovski
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Semver check
