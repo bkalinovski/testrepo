@@ -2,18 +2,18 @@ version: 1
 force:
   major: 1
   minor: 0
-  patch: 1
-  commit: 82742e556e6be4866396287c0a404dc53a90a511
+  patch: 0
+  commit: c0872a595f4054b22eb633c159978f49f16881c5
 wording:
   patch:
     - update
-    - initial
+    - fix
   minor:
     - change
+    - feat
     - improve
   major:
     - breaking
-    - the # For testing purposes
   release:
     - release-candidate
     - add-rc
