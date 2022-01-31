@@ -1,0 +1,19 @@
+version: 1
+force:
+  major: 1
+  minor: 0
+  patch: 1
+  commit: 82742e556e6be4866396287c0a404dc53a90a511
+wording:
+  patch:
+    - update
+    - initial
+  minor:
+    - change
+    - improve
+  major:
+    - breaking
+    - the # For testing purposes
+  release:
+    - release-candidate
+    - add-rc
