@@ -44,5 +44,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Semver check
         run: |
-          echo "${{ steps.semver }}"
+          echo "${{ toJson(steps.semver) }}"
           echo "Semantic version detected: ${{ steps.semver.outputs.semantic_version }}"
